@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Quicksand:wght@500;600;700&display=swap');
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    a { color: #8B5CF6; } a:hover { color: #7C3AED; }
+
+    .sheet {
+      --paper: #EFEAF7; --ink: #3A3452; --line: #D6CEE8;
+      width: 1000px; height: 1000px; padding: 44px;
+      background: var(--paper); color: var(--ink);
+      display: flex; flex-direction: column; gap: 24px;
+    }
+    .k-title { font-family: "Caveat", cursive; font-size: 34px; font-weight: 700; line-height: 1; }
+    .k-sub { font-size: 15px; color: #5C5570; max-width: 720px; line-height: 1.45; }
+    .tag { font-family: "Caveat", cursive; font-size: 18px; font-weight: 700; color: #9089A6; }
+
+    .stage { display: flex; gap: 36px; align-items: flex-start; }
+    .col-desktop { display: flex; flex-direction: column; gap: 10px; flex: 1 1 auto; min-width: 0; }
+    .col-right { display: flex; flex-direction: column; gap: 16px; width: 236px; flex: 0 0 236px; }
+
+    .stagebg { background: linear-gradient(160deg, #F3EEFF, #E7DEF8); border: 1.5px solid var(--line); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .stagebg.desktop { height: 592px; padding: 30px; }
+    .stagebg.mobile { height: 430px; padding: 16px; }
+
+    .card {
+      background: #fff; border-radius: 24px; padding: 26px;
+      box-shadow: 0 22px 44px -22px rgba(124,92,246,.42);
+      font-family: "Quicksand", ui-sans-serif, sans-serif;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      position: relative; width: 300px;
+    }
+    .card.wide { width: 336px; }
+    .badge { position: absolute; top: -22px; width: 44px; height: 44px; border-radius: 50%; background: #8B5CF6; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px -6px rgba(124,92,246,.6); }
+    .badge svg { width: 22px; height: 22px; color: #fff; }
+    .h { font-family: "Quicksand", sans-serif; font-weight: 700; font-size: 21px; margin-top: 10px; }
+    .p { font-size: 12px; color: #8B84A3; text-align: center; line-height: 1.5; }
+
+    .qrframe { background: #F5F1FF; border-radius: 18px; padding: 16px; position: relative; color: #3A3452; }
+    .qr { display: block; width: 128px; height: 128px; }
+    .rbrk { position: absolute; width: 22px; height: 22px; border: 4px solid #8B5CF6; }
+    .rbrk.tl { top: 6px; left: 6px; border-right: 0; border-bottom: 0; border-top-left-radius: 12px; }
+    .rbrk.tr { top: 6px; right: 6px; border-left: 0; border-bottom: 0; border-top-right-radius: 12px; }
+    .rbrk.bl { bottom: 6px; left: 6px; border-right: 0; border-top: 0; border-bottom-left-radius: 12px; }
+    .rbrk.br { bottom: 6px; right: 6px; border-left: 0; border-top: 0; border-bottom-right-radius: 12px; }
+
+    .inp { width: 100%; height: 46px; border-radius: 14px; background: #F4F1FB; border: 1.5px solid #E4DCF3; display: flex; align-items: center; padding: 0 16px; color: #9089A6; font-size: 12px; }
+    .pill { width: 100%; height: 46px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-family: "Quicksand", sans-serif; font-weight: 700; font-size: 13px; }
+    .pill.primary { background: #8B5CF6; color: #fff; box-shadow: 0 12px 22px -10px rgba(124,92,246,.7); }
+    .pill.ghost { background: #fff; color: #7C3AED; border: 1.5px solid #C9BCF0; gap: 8px; }
+    .pill.ghost svg { width: 15px; height: 15px; }
+    .chips { display: flex; gap: 8px; }
+    .fchip { font-size: 10px; font-weight: 700; font-family: "Quicksand", sans-serif; color: #7C3AED; background: #F0EAFD; border-radius: 999px; padding: 4px 10px; }
+
+    .accent-card { border: 1.5px dashed var(--line); border-radius: 6px; padding: 14px; display: flex; flex-direction: column; gap: 9px; background: #F8F5FD; }
+    .swatch-row { display: flex; align-items: center; gap: 8px; }
+    .swatch { width: 16px; height: 16px; border-radius: 4px; border: 1px solid rgba(0,0,0,.12); }
+    .meta { font-size: 11.5px; color: #5C5570; line-height: 1.45; }
+    .meta b { color: var(--ink); }
+
+    .notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; border-top: 1px solid var(--line); padding-top: 18px; }
+    .note h4 { margin: 0 0 6px; font-family: "Caveat", cursive; font-size: 19px; font-weight: 700; }
+    .note p { margin: 0; font-size: 12.5px; line-height: 1.5; color: #4C4660; }
+  </style>
+</helmet>
+
+<div class="sheet">
+  <div style="display:flex; flex-direction:column; gap:6px;">
+    <div class="k-title">Direction C &mdash; Soft Pastel</div>
+    <div class="k-sub">Friendly and reassuring. Keeps the violet, softens everything around it: a rounded card, layered shadow, big tappable controls. The corner brackets survive as a rounded, playful accent.</div>
+  </div>
+
+  <div class="stage">
+    <div class="col-desktop">
+      <div class="tag">Desktop</div>
+      <div class="stagebg desktop">
+        <div class="card wide">
+          <div class="badge">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm10-2h2v2h-2v-2zm4 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm4 0h2v2h-2v-2zm-2-2h2v2h-2v-2zm0 4h2v2h-2v-2z"/></svg>
+          </div>
+          <div class="h">Quick QR</div>
+          <div class="p">Paste a link, get a clean code you can save and share.</div>
+          <div class="qrframe">
+            <svg class="qr" viewBox="0 0 128 128" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <rect width="128" height="128" fill="#fff"/>
+              <g fill="currentColor">
+                <rect x="8" y="8" width="32" height="32"/><rect x="14" y="14" width="20" height="20" fill="#fff"/><rect x="19" y="19" width="10" height="10" fill="currentColor"/>
+                <rect x="88" y="8" width="32" height="32"/><rect x="94" y="14" width="20" height="20" fill="#fff"/><rect x="99" y="19" width="10" height="10" fill="currentColor"/>
+                <rect x="8" y="88" width="32" height="32"/><rect x="14" y="94" width="20" height="20" fill="#fff"/><rect x="19" y="99" width="10" height="10" fill="currentColor"/>
+                <rect x="48" y="8" width="6" height="6"/><rect x="60" y="8" width="6" height="6"/><rect x="72" y="8" width="6" height="6"/>
+                <rect x="8" y="48" width="6" height="6"/><rect x="8" y="60" width="6" height="6"/><rect x="8" y="72" width="6" height="6"/>
+                <rect x="48" y="48" width="6" height="6"/><rect x="54" y="54" width="6" height="6"/><rect x="66" y="48" width="6" height="6"/><rect x="72" y="60" width="6" height="6"/>
+                <rect x="48" y="66" width="6" height="6"/><rect x="60" y="72" width="6" height="6"/><rect x="84" y="54" width="6" height="6"/><rect x="96" y="60" width="6" height="6"/>
+                <rect x="108" y="48" width="6" height="6"/><rect x="54" y="84" width="6" height="6"/><rect x="66" y="90" width="6" height="6"/><rect x="78" y="84" width="6" height="6"/>
+                <rect x="90" y="96" width="6" height="6"/><rect x="102" y="84" width="6" height="6"/><rect x="84" y="108" width="6" height="6"/><rect x="108" y="102" width="6" height="6"/>
+              </g>
+            </svg>
+            <span class="rbrk tl"></span><span class="rbrk tr"></span><span class="rbrk bl"></span><span class="rbrk br"></span>
+          </div>
+          <div class="inp">https://your-link.com</div>
+          <div class="pill primary">Generate</div>
+          <div class="pill ghost">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            Download
+          </div>
+          <div class="chips"><span class="fchip">PNG</span><span class="fchip">SVG</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-right">
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div class="tag">Mobile</div>
+        <div class="stagebg mobile">
+          <div class="card" style="width:100%; padding:20px; gap:10px;">
+            <div class="badge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm10-2h2v2h-2v-2zm4 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm4 0h2v2h-2v-2zm-2-2h2v2h-2v-2zm0 4h2v2h-2v-2z"/></svg></div>
+            <div class="h" style="font-size:17px;">Quick QR</div>
+            <div class="qrframe" style="padding:12px;">
+              <svg class="qr" viewBox="0 0 128 128" preserveAspectRatio="xMidYMid meet" style="width:92px; height:92px;" aria-hidden="true">
+                <rect width="128" height="128" fill="#fff"/>
+                <g fill="currentColor">
+                  <rect x="8" y="8" width="32" height="32"/><rect x="14" y="14" width="20" height="20" fill="#fff"/><rect x="19" y="19" width="10" height="10" fill="currentColor"/>
+                  <rect x="88" y="8" width="32" height="32"/><rect x="94" y="14" width="20" height="20" fill="#fff"/><rect x="99" y="19" width="10" height="10" fill="currentColor"/>
+                  <rect x="8" y="88" width="32" height="32"/><rect x="14" y="94" width="20" height="20" fill="#fff"/><rect x="19" y="99" width="10" height="10" fill="currentColor"/>
+                  <rect x="52" y="52" width="8" height="8"/><rect x="68" y="60" width="8" height="8"/><rect x="52" y="72" width="8" height="8"/><rect x="84" y="84" width="8" height="8"/><rect x="60" y="96" width="8" height="8"/>
+                </g>
+              </svg>
+              <span class="rbrk tl"></span><span class="rbrk tr"></span><span class="rbrk bl"></span><span class="rbrk br"></span>
+            </div>
+            <div class="inp" style="height:42px;">your-link.com</div>
+            <div class="pill primary" style="height:42px;">Generate</div>
+            <div class="pill ghost" style="height:42px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+              Download
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accent-card">
+        <div class="swatch-row">
+          <span class="swatch" style="background:#8B5CF6"></span>
+          <span class="swatch" style="background:#EFEAF7"></span>
+          <span class="swatch" style="background:#F5F1FF"></span>
+          <span class="meta"><b>Palette</b> &mdash; violet on lavender tints</span>
+        </div>
+        <div class="meta"><b>Type</b> &mdash; Quicksand rounded UI + system sans copy</div>
+        <div class="meta"><b>Signature</b> &mdash; brackets rounded &amp; chunky</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <div class="note">
+      <h4>Why this</h4>
+      <p>Closest to today's app, so it is the safest evolution. Warm, low-friction, and the big secondary Download pill makes the new feature obvious to anyone.</p>
+    </div>
+    <div class="note">
+      <h4>Tradeoff</h4>
+      <p>Softest personality &mdash; risks reading as consumer-cute rather than "professional tool". Heavy shadows and rounding date faster than flat restraint.</p>
+    </div>
+    <div class="note">
+      <h4>Download</h4>
+      <p>Full-width ghost pill right below Generate, with PNG / SVG format chips beneath. Impossible to miss.</p>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

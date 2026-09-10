@@ -1,0 +1,8 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1000, "h": 1000, "title": "Direction A — Minimal Editorial" },
+    { "file": "Technical.dc.html", "x": 1120, "y": 0, "w": 1000, "h": 1000, "title": "Direction B — Dark Technical" },
+    { "file": "Pastel.dc.html", "x": 2240, "y": 0, "w": 1000, "h": 1000, "title": "Direction C — Soft Pastel" }
+  ],
+  "launch": { "view": "canvas" }
+}

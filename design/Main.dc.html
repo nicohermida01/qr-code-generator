@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Instrument+Serif:ital@0;1&display=swap');
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    a { color: #6B4BD6; } a:hover { color: #573BBF; }
+
+    .sheet {
+      --paper: #F4F3EF; --ink: #2B2A28; --line: #CFCCC5;
+      --fill: #E9E7E2; --muted: #918B80; --accent: #6B4BD6;
+      width: 1000px; height: 1000px; padding: 44px;
+      background: var(--paper); color: var(--ink);
+      display: flex; flex-direction: column; gap: 24px;
+    }
+    .k-title { font-family: "Caveat", cursive; font-size: 34px; font-weight: 700; line-height: 1; }
+    .k-sub { font-size: 15px; color: #5A564E; max-width: 720px; line-height: 1.45; }
+    .tag { font-family: "Caveat", cursive; font-size: 18px; font-weight: 700; color: var(--muted); }
+
+    .stage { display: flex; gap: 36px; align-items: flex-start; }
+    .col-desktop { display: flex; flex-direction: column; gap: 10px; flex: 1 1 auto; min-width: 0; }
+    .col-right { display: flex; flex-direction: column; gap: 16px; width: 236px; flex: 0 0 236px; }
+
+    .frame { background: #fff; border: 1.5px solid var(--line); border-radius: 6px; }
+    .frame.desktop { height: 384px; padding: 26px; display: flex; gap: 22px; }
+    .frame.mobile { height: 372px; padding: 16px; display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+
+    .divider-v { width: 1px; background: var(--line); align-self: stretch; }
+    .wf-left { width: 45%; display: flex; flex-direction: column; gap: 14px; }
+    .wf-right { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
+
+    .chip { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 3px; padding: 4px 7px; align-self: flex-start; }
+    .wordmark { font-family: "Instrument Serif", Georgia, serif; font-size: 40px; line-height: .96; color: var(--ink); }
+    .rule { height: 1px; background: var(--ink); width: 46px; }
+    .pl { height: 9px; background: var(--fill); border-radius: 2px; }
+    .field { height: 40px; border: 1.5px solid var(--line); border-radius: 5px; background: #fff; display: flex; align-items: center; padding: 0 12px; color: var(--muted); font-size: 12px; }
+    .link-btn { font-size: 13px; color: var(--accent); border-bottom: 1.5px solid var(--accent); align-self: flex-start; padding-bottom: 1px; }
+
+    .qrwrap { position: relative; width: 168px; height: 168px; color: var(--ink); }
+    .qr { display: block; width: 100%; height: 100%; }
+    .tick { position: absolute; width: 16px; height: 16px; }
+    .tick.tl { top: -9px; left: -9px; border-top: 1.5px solid var(--ink); border-left: 1.5px solid var(--ink); }
+    .tick.tr { top: -9px; right: -9px; border-top: 1.5px solid var(--ink); border-right: 1.5px solid var(--ink); }
+    .tick.bl { bottom: -9px; left: -9px; border-bottom: 1.5px solid var(--ink); border-left: 1.5px solid var(--ink); }
+    .tick.br { bottom: -9px; right: -9px; border-bottom: 1.5px solid var(--ink); border-right: 1.5px solid var(--ink); }
+
+    .dl-row { display: flex; align-items: center; gap: 10px; }
+    .dl-ico { width: 15px; height: 15px; color: #6B4BD6; }
+    .mini-qr { width: 96px; height: 96px; color: var(--ink); align-self: center; }
+
+    .accent-card { border: 1.5px dashed var(--line); border-radius: 6px; padding: 14px; display: flex; flex-direction: column; gap: 9px; background: #FBFAF8; }
+    .swatch-row { display: flex; align-items: center; gap: 8px; }
+    .swatch { width: 16px; height: 16px; border-radius: 4px; border: 1px solid rgba(0,0,0,.12); }
+    .meta { font-size: 11.5px; color: #5A564E; line-height: 1.45; }
+    .meta b { color: var(--ink); }
+
+    .notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; border-top: 1px solid var(--line); padding-top: 18px; }
+    .note h4 { margin: 0 0 6px; font-family: "Caveat", cursive; font-size: 19px; font-weight: 700; }
+    .note p { margin: 0; font-size: 12.5px; line-height: 1.5; color: #4A463E; }
+  </style>
+</helmet>
+
+<div class="sheet">
+  <div style="display:flex; flex-direction:column; gap:6px;">
+    <div class="k-title">Direction A &mdash; Minimal Editorial</div>
+    <div class="k-sub">Restraint as professionalism. Whitespace, a serif display wordmark, hairline rules, one ink-violet reserved for actions. The QR is the hero; everything else recedes.</div>
+  </div>
+
+  <div class="stage">
+    <div class="col-desktop">
+      <div class="tag">Desktop</div>
+      <div class="frame desktop">
+        <div class="wf-left">
+          <span class="chip">Quick QR</span>
+          <div class="wordmark">Quick<br>QR</div>
+          <div class="rule"></div>
+          <div class="pl" style="width:88%"></div>
+          <div class="pl" style="width:62%"></div>
+          <div style="flex:1"></div>
+          <div class="pl" style="width:40%; height:7px;"></div>
+          <div class="field">Enter a URL or text</div>
+          <span class="link-btn">Generate &rarr;</span>
+        </div>
+        <div class="divider-v"></div>
+        <div class="wf-right">
+          <div class="qrwrap">
+            <svg class="qr" viewBox="0 0 128 128" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <rect width="128" height="128" fill="#fff"/>
+              <g fill="currentColor">
+                <rect x="8" y="8" width="32" height="32"/><rect x="14" y="14" width="20" height="20" fill="#fff"/><rect x="19" y="19" width="10" height="10" fill="currentColor"/>
+                <rect x="88" y="8" width="32" height="32"/><rect x="94" y="14" width="20" height="20" fill="#fff"/><rect x="99" y="19" width="10" height="10" fill="currentColor"/>
+                <rect x="8" y="88" width="32" height="32"/><rect x="14" y="94" width="20" height="20" fill="#fff"/><rect x="19" y="99" width="10" height="10" fill="currentColor"/>
+                <rect x="48" y="8" width="6" height="6"/><rect x="60" y="8" width="6" height="6"/><rect x="72" y="8" width="6" height="6"/>
+                <rect x="8" y="48" width="6" height="6"/><rect x="8" y="60" width="6" height="6"/><rect x="8" y="72" width="6" height="6"/>
+                <rect x="48" y="48" width="6" height="6"/><rect x="54" y="54" width="6" height="6"/><rect x="66" y="48" width="6" height="6"/><rect x="72" y="60" width="6" height="6"/>
+                <rect x="48" y="66" width="6" height="6"/><rect x="60" y="72" width="6" height="6"/><rect x="84" y="54" width="6" height="6"/><rect x="96" y="60" width="6" height="6"/>
+                <rect x="108" y="48" width="6" height="6"/><rect x="54" y="84" width="6" height="6"/><rect x="66" y="90" width="6" height="6"/><rect x="78" y="84" width="6" height="6"/>
+                <rect x="90" y="96" width="6" height="6"/><rect x="102" y="84" width="6" height="6"/><rect x="84" y="108" width="6" height="6"/><rect x="108" y="102" width="6" height="6"/>
+                <rect x="48" y="102" width="6" height="6"/><rect x="60" y="108" width="6" height="6"/>
+              </g>
+            </svg>
+            <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+          </div>
+          <div class="dl-row">
+            <svg class="dl-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            <span class="link-btn">Download PNG</span>
+            <span class="meta">&middot; SVG</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-right">
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div class="tag">Mobile</div>
+        <div class="frame mobile">
+          <span class="chip">Quick QR</span>
+          <div class="wordmark" style="font-size:28px;">Quick QR</div>
+          <div class="mini-qr">
+            <svg class="qr" viewBox="0 0 128 128" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <rect width="128" height="128" fill="#fff"/>
+              <g fill="currentColor">
+                <rect x="8" y="8" width="32" height="32"/><rect x="14" y="14" width="20" height="20" fill="#fff"/><rect x="19" y="19" width="10" height="10" fill="currentColor"/>
+                <rect x="88" y="8" width="32" height="32"/><rect x="94" y="14" width="20" height="20" fill="#fff"/><rect x="99" y="19" width="10" height="10" fill="currentColor"/>
+                <rect x="8" y="88" width="32" height="32"/><rect x="14" y="94" width="20" height="20" fill="#fff"/><rect x="19" y="99" width="10" height="10" fill="currentColor"/>
+                <rect x="52" y="52" width="8" height="8"/><rect x="68" y="60" width="8" height="8"/><rect x="52" y="72" width="8" height="8"/><rect x="84" y="84" width="8" height="8"/><rect x="60" y="96" width="8" height="8"/>
+              </g>
+            </svg>
+          </div>
+          <div class="field" style="height:36px;">URL or text</div>
+          <div class="field" style="height:36px; justify-content:center; color:#fff; background:#2B2A28; border-color:#2B2A28;">Generate</div>
+          <div class="dl-row" style="justify-content:center;">
+            <svg class="dl-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            <span class="link-btn">Download</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="accent-card">
+        <div class="swatch-row">
+          <span class="swatch" style="background:#6B4BD6"></span>
+          <span class="swatch" style="background:#2B2A28"></span>
+          <span class="swatch" style="background:#F4F3EF"></span>
+          <span class="meta"><b>Palette</b> &mdash; paper &middot; ink &middot; 1 violet</span>
+        </div>
+        <div class="meta"><b>Type</b> &mdash; Instrument Serif display + system sans body</div>
+        <div class="meta"><b>Signature</b> &mdash; corner ticks thinned to hairlines</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <div class="note">
+      <h4>Why this</h4>
+      <p>Reads as a considered tool, not a toy. Ages well, prints well, and puts zero visual noise between the user and the code they came for.</p>
+    </div>
+    <div class="note">
+      <h4>Tradeoff</h4>
+      <p>Quietest of the three &mdash; less arresting at a glance, and the serif wordmark needs a solid fallback since exported PNGs drop the webfont.</p>
+    </div>
+    <div class="note">
+      <h4>Download</h4>
+      <p>Understated text action with a down-tray icon, directly under the QR. PNG primary, SVG as a secondary inline link.</p>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>
